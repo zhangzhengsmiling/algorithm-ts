@@ -1,5 +1,4 @@
-import { InstallPackageAction } from '../../node_modules/typescript/lib/typescript';
-import timer from '../utils/timer';
+// import timer from '../utils/timer';
 
 const insertionSort = (arr: number[]) => {
   for(let i = 1; i < arr.length; i++) {
@@ -12,13 +11,12 @@ const insertionSort = (arr: number[]) => {
     arr[++idx] = temp;    
   }
 }
-const COUNT = 1000;
-const arr = new Array(COUNT);
-for(let i = 0; i < COUNT; i++) {
-  arr[i] = Math.random() * 10000 + 1;
-}
-insertionSort(arr);
-const t = timer(insertionSort, { loggerMode: true })(arr);
+// const COUNT = 1000;
+// const arr = new Array(COUNT);
+// for(let i = 0; i < COUNT; i++) {
+//   arr[i] = Math.random() * 10000 + 1;
+// }
+// insertionSort(arr);
+// const t = timer(insertionSort, { loggerMode: true })(arr);
 
-// export default insertionSort;
-
+export default insertionSort;
