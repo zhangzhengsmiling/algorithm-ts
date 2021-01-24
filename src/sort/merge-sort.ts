@@ -1,7 +1,7 @@
 /**
  * merge two sorted arrays, and make it be one array which is sorted.
  * @param left the first sorted array
- * @param right the oother sorted array
+ * @param right the other sorted array
  */
 
  let count = 0;
