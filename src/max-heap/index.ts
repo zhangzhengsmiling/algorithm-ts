@@ -23,10 +23,26 @@ class MaxHeap {
     return arr;
   }
 
+  /**
+   * 构造大顶堆
+   * @param arr 数组
+   */
+  build = (arr: number[]) => {
+    const temp = [...arr];
+    for(let i = Math.floor(temp.length / 2); i >= 0; i--) {
+      this.maxHeapify(temp, i);
+    }
+    return temp;
+  }
+
 }
 
-const arr = [1, 2, 3];
+const arr = [1, 5, 3];
 const mh = new MaxHeap();
 mh.maxHeapify(arr, 0);
 console.log(arr);
+
+const temp = [1, 2, 3, 4, 5, 6, 7];
+const res = mh.build(temp);
+console.log(res);
 
