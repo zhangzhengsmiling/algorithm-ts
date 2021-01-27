@@ -35,6 +35,16 @@ class MaxHeap {
     return temp;
   }
 
+  heapSort = (arr: number[]) => {
+    const temp = [];
+    arr = this.build(arr);
+    while(arr.length > 0) {
+      temp.unshift(arr[0]);
+      arr = arr.slice(1);
+    }
+    return temp;
+  }
+
 }
 
 const arr = [1, 5, 3];
@@ -46,4 +56,6 @@ const temp = [1, 2, 3, 4, 5, 6, 7];
 const res = mh.build(temp);
 console.log(res);
 
+const v = mh.heapSort(temp.reverse())
+console.log(v)
 export default MaxHeap;
