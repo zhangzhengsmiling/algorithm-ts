@@ -39,23 +39,26 @@ class MaxHeap {
     const temp = [];
     arr = this.build(arr);
     while(arr.length > 0) {
-      temp.unshift(arr[0]);
-      arr = arr.slice(1);
+      const _temp = arr[0];
+      arr[0] = arr[arr.length - 1];
+      arr[arr.length - 1] = _temp;
+      temp.unshift(arr.pop());
+      this.maxHeapify(arr, 0);
     }
     return temp;
   }
 
 }
 
-const arr = [1, 5, 3];
-const mh = new MaxHeap();
-mh.maxHeapify(arr, 0);
-console.log(arr);
+// const arr = [1, 5, 3];
+// const mh = new MaxHeap();
+// mh.maxHeapify(arr, 0);
+// console.log(arr);
 
-const temp = [1, 2, 3, 4, 5, 6, 7];
-const res = mh.build(temp);
-console.log(res);
+// const temp = [7, 4, 3, 6, 5, 2, 1];
+// const res = mh.build(temp);
+// console.log(res);
 
-const v = mh.heapSort(temp.reverse())
-console.log(v)
+// const v = mh.heapSort(temp.reverse())
+// console.log(v)
 export default MaxHeap;
