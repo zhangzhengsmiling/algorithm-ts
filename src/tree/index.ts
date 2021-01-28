@@ -1,5 +1,5 @@
 
-class BinaryTreeNode<DataType> {
+export class BinaryTreeNode<DataType> {
   public val: DataType;
   public left: BinaryTreeNode<DataType> | null;
   public right: BinaryTreeNode<DataType> | null;
@@ -54,8 +54,8 @@ class BinaryTree<DataType> {
   }
 }
 
-const bt = new BinaryTree<number | null>();
+const bh = new BinaryTree<number>();
+const temp = bh.init([1, 2, 3]);
+console.log(temp)
 
-bt.init([1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4])
-console.log(bt.root)
-
+export default BinaryTree;
