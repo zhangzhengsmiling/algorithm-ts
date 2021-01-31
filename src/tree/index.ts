@@ -22,23 +22,24 @@ class BinaryTree<DataType> {
     this.root = root || null;
   }
 
-  public init (dataList: DataType[]): BinaryTreeNode<DataType> | null {
+  public init (dataList: (DataType | null)[]): BinaryTreeNode<DataType> | null {
     if(dataList.length === 0) return null;
-    const binaryTreeNodeList = dataList.map(val => val === null ? null : new BinaryTreeNode<DataType>(val));
-    binaryTreeNodeList.forEach((node, index) => {
-      const leftIdx = index * 2 - 1;
-      const rightIdx = index * 2 + 1;
-      const leftChild = binaryTreeNodeList[leftIdx];
-      const rightChild = binaryTreeNodeList[rightIdx];
-      if(node === null && (leftChild || rightIdx)) {
+    const temp = [null, ...dataList].map(val => val === null ? null : new BinaryTreeNode<DataType>(val));
+    for(let i = 1; i < temp.length; i++) {
+      const node = temp[i];
+      const leftIdx = i * 2;
+      const rightIdx = i * 2 + 1;
+      const leftChild = temp[leftIdx];
+      const rightChild = temp[rightIdx];
+      if((node === null) && (leftChild || rightChild)) {
         throw new Error('data error, please checkout tree node list...');
       }
       if(node !== null) {
         node.left = leftChild || null;
         node.right = rightChild || null;
       }
-    })
-    this.root = binaryTreeNodeList[0];
+    }
+    this.root = temp[1];
     return this.root;
   }
 
@@ -55,7 +56,7 @@ class BinaryTree<DataType> {
 }
 
 const bh = new BinaryTree<number>();
-const temp = bh.init([1, 2, 3]);
+const temp = bh.init([1, 2, 3, 4, null, 6, 7, 8, 9]);
 console.log(temp)
 
 export default BinaryTree;
