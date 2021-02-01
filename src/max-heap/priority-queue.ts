@@ -1,3 +1,4 @@
+import { isForOfStatement } from 'typescript';
 import MaxHeap from './max-heap';
 
 class PriorityQueue extends MaxHeap {
@@ -9,7 +10,7 @@ class PriorityQueue extends MaxHeap {
   }
 
   /**
-   * 获取对重最大元素
+   * 获取权重最大元素
    */
   maximum = () => {
     return this.heap[0];
@@ -34,16 +35,51 @@ class PriorityQueue extends MaxHeap {
    * @param prevKey 
    * @param nextKey 
    */
-  // @TODO:
-  increaseKey = (prevKey: number, nextKey: number) => {
+  increaseKey = (index: number, nextKey: number) => {
+    // console.log(this.heap);
+    const newHeap = [0, ...this.heap];
+    const idx = index + 1;
+    // temp[idx] = 
+    if(newHeap[idx] > nextKey) {
+      throw new Error('next key cant not be smaller than the previous one.');
+    }
+    newHeap[idx] = nextKey;
+    let ptr = idx;
+    while(ptr > 1) {
+      const ptrParent = Math.floor(ptr / 2);
+      if(newHeap[ptrParent] >= newHeap[ptr]) {
+        break;
+      } else {
+        const temp = newHeap[ptr];
+        newHeap[ptr] = newHeap[ptrParent];
+        newHeap[ptrParent] = temp;
+        ptr = ptrParent;
+      }
+    }
+    newHeap.shift();
+    this.heap = newHeap;
+  }
 
+  /**
+   * 向优先队列中插入新值
+   * @param key 优先权重
+   */
+  insertKey = (key: number) => {
+    const heap = this.heap;
+    this.increaseKey(heap.length, key);
   }
 
 }
 
 const arr = [2, 34,56, 67,7,3 ,23, 4];
 const priorityQueue = new PriorityQueue(arr);
+// console.log(priorityQueue.heap);
+// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
+// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
+// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
 console.log(priorityQueue.heap);
-console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
-console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
-console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
+priorityQueue.increaseKey(5, 66);
+console.log(priorityQueue.heap);
+priorityQueue.insertKey(100)
+console.log(priorityQueue.heap)
+
