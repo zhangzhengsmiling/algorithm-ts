@@ -43,20 +43,16 @@ class BinaryTree<DataType> {
     return this.root;
   }
 
-  private preOrder = (root: BinaryTreeNode<DataType> | null, callback?: (val?: DataType) => void) => {
+  public preOrder = (root: BinaryTreeNode<DataType> | null, callback?: (val?: DataType) => void) => {
     if (root === null) return;
     if(typeof callback === 'function') {
       callback(root.val);
     }
     if(root !== null) {
-      this.preOrder(root.left);
-      this.preOrder(root.right)
+      this.preOrder(root.left, callback);
+      this.preOrder(root.right, callback)
     }
   }
 }
-
-const bh = new BinaryTree<number>();
-const temp = bh.init([1, 2, 3, 4, null, 6, 7, 8, 9]);
-console.log(temp)
 
 export default BinaryTree;

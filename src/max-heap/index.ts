@@ -50,15 +50,4 @@ class MaxHeap {
 
 }
 
-// const arr = [1, 5, 3];
-// const mh = new MaxHeap();
-// mh.maxHeapify(arr, 0);
-// console.log(arr);
-
-// const temp = [7, 4, 3, 6, 5, 2, 1];
-// const res = mh.build(temp);
-// console.log(res);
-
-// const v = mh.heapSort(temp.reverse())
-// console.log(v)
 export default MaxHeap;

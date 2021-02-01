@@ -1,4 +1,3 @@
-import { isExportSpecifier } from 'typescript';
 import BinaryTree, { BinaryTreeNode } from '../';
 
 
@@ -9,49 +8,66 @@ describe('binary tree:', () => {
     expect(BinaryTreeNode).toBeInstanceOf(Function);
   });
 
-  // const bh = new BinaryTree<number>();
-
   it('binary tree node:', () => {
-    const temp = new BinaryTreeNode<number>(100);
-    expect(temp).toEqual({
+    expect(new BinaryTreeNode<number>(100)).toEqual({
       val: 100,
       left: null,
       right: null,
-    })
+    });
 
-    const temp2 = new BinaryTreeNode<string>('hello, world');
-    expect(temp2).toEqual({
+    expect(new BinaryTreeNode<string>('hello, world')).toEqual({
       val: 'hello, world',
       left: null,
       right: null,
     })
+  });
+
+  it('init a binary tree:', () => {
+    const bh = new BinaryTree<number>();
+    expect(bh.init([1, 2, 3]))
+      .toEqual({
+        val: 1,
+        left: {
+          val: 2,
+          left: null,
+          right: null,
+        },
+        right: {
+          val: 3,
+          left: null,
+          right: null
+        }
+      })
+
+    expect(bh.init([1, 2, 3, null, 4, 5]))
+      .toEqual({
+        val: 1,
+        left: {
+          val: 2,
+          left: null,
+          right: { val: 4, left: null, right: null }
+        },
+        right: {
+          val: 3,
+          left: { val: 5, left: null, right: null },
+          right: null,
+        }
+      })
+
+    try {
+      bh.init([1, null, 3, 4, 5, 6]);
+    } catch(err) {
+      expect(err.message).toEqual('data error, please checkout tree node list...');
+    }
+  });
+
+  it('binary tree preorder:', () => {
+    const bh = new BinaryTree<number>();
+    const tree = bh.init([1, 2, 3, 4, 5, 6, 7]);
+    const temp: number[] = [];
+    bh.preOrder(tree, item => {
+      temp.push(item as number)
+    });
+    expect(temp).toEqual([1, 2, 4, 5, 3, 6, 7]);
   })
-
-  // it('init a binary tree:', () => {
-  //   const bh = new BinaryTree<number>();
-  //   const temp = bh.init([1, 2, 3]);
-  //   expect(temp).toEqual({
-  //     val: 1,
-  //     left: {
-  //       val: 2,
-  //       left: null,
-  //       right: null,
-  //     },
-  //     right: {
-  //       val: 3,
-  //       left: null,
-  //       right: null
-  //     }
-  //   })
-  // })
-
-  // it('init a binary tree:', () => {
-  //   const out = bh.init([1, 2, 3]);
-  //   const root = new BinaryTreeNode(1);
-  //   root.left = new BinaryTreeNode(2);
-  //   root.right = new BinaryTreeNode(3);
-  //   expect(out).toEqual(root);
-  // })
-
-
 })
