@@ -1,4 +1,4 @@
-import MaxHeap from './index';
+import MaxHeap from './max-heap';
 
 class PriorityQueue extends MaxHeap {
   public heap: number[] = [];

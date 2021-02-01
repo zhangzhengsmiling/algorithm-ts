@@ -65,7 +65,7 @@ describe('binary tree:', () => {
     const bh = new BinaryTree<number>();
     const tree = bh.init([1, 2, 3, 4, 5, 6, 7]);
     const temp: number[] = [];
-    bh.preOrder(tree, item => {
+    bh.preOrder(item => {
       temp.push(item as number)
     });
     expect(temp).toEqual([1, 2, 4, 5, 3, 6, 7]);

@@ -18,13 +18,17 @@ export class BinaryTreeNode<DataType> {
 class BinaryTree<DataType> {
   public root: BinaryTreeNode<DataType> | null;
   
-  constructor (root?: BinaryTreeNode<DataType>) {
-    this.root = root || null;
+  constructor (datalist?: DataType[]) {
+    if(typeof datalist === 'undefined') {
+      this.root = null;
+      return;
+    }
+    this.root = this.init(datalist);
   }
 
-  public init (dataList: (DataType | null)[]): BinaryTreeNode<DataType> | null {
-    if(dataList.length === 0) return null;
-    const temp = [null, ...dataList].map(val => val === null ? null : new BinaryTreeNode<DataType>(val));
+  public init (datalist: (DataType | null)[]): BinaryTreeNode<DataType> | null {
+    if(datalist.length === 0) return null;
+    const temp = [null, ...datalist].map(val => val === null ? null : new BinaryTreeNode<DataType>(val));
     for(let i = 1; i < temp.length; i++) {
       const node = temp[i];
       const leftIdx = i * 2;
@@ -43,14 +47,19 @@ class BinaryTree<DataType> {
     return this.root;
   }
 
-  public preOrder = (root: BinaryTreeNode<DataType> | null, callback?: (val?: DataType) => void) => {
+  // 二叉树前序遍历
+  public preOrder = (callback?: (val?: DataType) => void) => {
+    this.recursion(this.root, callback);
+  }
+
+  public recursion = (root: BinaryTreeNode<DataType> | null, callback?: (val?: DataType) => void) => {
     if (root === null) return;
     if(typeof callback === 'function') {
       callback(root.val);
     }
     if(root !== null) {
-      this.preOrder(root.left, callback);
-      this.preOrder(root.right, callback)
+      this.recursion(root.left, callback);
+      this.recursion(root.right, callback)
     }
   }
 }
