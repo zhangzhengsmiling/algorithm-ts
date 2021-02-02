@@ -71,15 +71,5 @@ class PriorityQueue extends MaxHeap {
 
 }
 
-const arr = [2, 34,56, 67,7,3 ,23, 4];
-const priorityQueue = new PriorityQueue(arr);
-// console.log(priorityQueue.heap);
-// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
-// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
-// console.log(priorityQueue.maximumExtract(), priorityQueue.heap);
-console.log(priorityQueue.heap);
-priorityQueue.increaseKey(5, 66);
-console.log(priorityQueue.heap);
-priorityQueue.insertKey(100)
-console.log(priorityQueue.heap)
+export default PriorityQueue;
 

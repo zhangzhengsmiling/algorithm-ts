@@ -40,9 +40,4 @@ const mergeSort = (arr: number[]): number[] => {
   return merge(left, right);
 }
 
-const ds = [4, 5, 6, 1, 2, 3]
-const a = mergeSort(ds);
-
-console.log(a, count)
-
-// export default mergeSort;
+export default mergeSort;

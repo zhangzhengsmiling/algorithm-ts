@@ -1,4 +1,9 @@
-# 1.0.0 (2021-01-27)
+# 1.0.0 (2021-02-01)
+
+
+### Bug Fixes
+
+* **binary-tree:** fix the initial method of binary search tree ([8c6e79c](https://github.com/zhangzhengsmiling/algorithm-ts/commit/8c6e79cc372b419694bd39263d22856a6bd09c53))
 
 
 ### Features
