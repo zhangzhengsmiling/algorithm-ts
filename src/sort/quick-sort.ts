@@ -1,3 +1,5 @@
+import { forEachTrailingCommentRange } from "typescript";
+
 /**
  * 生成随机值
  * 辅助随机快排算法
@@ -50,22 +52,28 @@ const partition = (array: number[], begin: number, end: number) => {
  * 将其置换到数组左侧
  */
 const partition2 = (array: number[], begin: number, end: number) => {
+  // const pivot = array[end];
+  // let ptr_left = begin - 1;
+  // let ptr_right = begin;
+  // while(ptr_right < end - 1) {
+  //   if(array[ptr_right] < pivot) {
+  //     swapArray(array, ptr_right, ++ptr_left);
+  //   }
+  //   ptr_right++;
+  // }
+  // swapArray(array, ptr_left + 1, end);
+  // return ptr_left                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            + 1;
   const pivot = array[end];
-  let ptr_left = begin - 1;
-  let ptr_right = begin;
-  while(ptr_right < end) {
+  let  ptr_left = begin - 1;
+  for(let ptr_right = begin; ptr_right < end; ptr_right++) {
     if(array[ptr_right] < pivot) {
-      swapArray(array, ptr_right, ++ptr_left);
+      ptr_left++;
+      swapArray(array, ptr_left, ptr_right);
     }
-    ptr_right++;
   }
   swapArray(array, ptr_left + 1, end);
   return ptr_left + 1;
 }
-
-// const array = [2, 3, 45, 6, 77, 8, 844, 5, 46];
-// partition2(array, 0, array.length - 1);
-// console.log(array);
 
 const quickSort = (array: number[], begin: number, end: number) => {
   if(begin >= end) return;
