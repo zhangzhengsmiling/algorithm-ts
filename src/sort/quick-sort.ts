@@ -20,6 +20,11 @@ const swapArray = (array: number[], index1: number, index2: number) => {
   array[index2] = temp;
 }
 
+/**
+ * partition algorithm
+ * 声明两个指针，分别从数组左右两端扫描，
+ * 左指针找到第一个比pivot大的值，右指针找到第一个比pivot小的值，交换两者位置
+ */
 const partition = (array: number[], begin: number, end: number) => {
   if(array.length === 0) return begin;
   // 随机生成一个下标作为主元，与begin值交换，随机化快排过程
@@ -39,6 +44,28 @@ const partition = (array: number[], begin: number, end: number) => {
   swapArray(array, begin, ptr_left);
   return ptr_left;
 }
+
+/**
+ * 单指针从左到右扫描，遇到小于pivot的值
+ * 将其置换到数组左侧
+ */
+const partition2 = (array: number[], begin: number, end: number) => {
+  const pivot = array[end];
+  let ptr_left = begin - 1;
+  let ptr_right = begin;
+  while(ptr_right < end) {
+    if(array[ptr_right] < pivot) {
+      swapArray(array, ptr_right, ++ptr_left);
+    }
+    ptr_right++;
+  }
+  swapArray(array, ptr_left + 1, end);
+  return ptr_left + 1;
+}
+
+// const array = [2, 3, 45, 6, 77, 8, 844, 5, 46];
+// partition2(array, 0, array.length - 1);
+// console.log(array);
 
 const quickSort = (array: number[], begin: number, end: number) => {
   if(begin >= end) return;
