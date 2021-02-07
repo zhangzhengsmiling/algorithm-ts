@@ -6,6 +6,7 @@ import { forEachTrailingCommentRange } from "typescript";
  * @param start range of random number
  * @param end 
  */
+// @TODO:: bug to be fixed
 const random = (start: number, end: number) => {
   return Math.floor(start + Math.random() * (end - start + 1));
 }
@@ -31,6 +32,8 @@ export const partition = (array: number[], begin: number, end: number) => {
   if(array.length === 0) return begin;
   // 随机生成一个下标作为主元，与begin值交换，随机化快排过程
   const idx_pivot = random(begin, end);
+  console.log(idx_pivot);
+  
   swapArray(array, idx_pivot, begin);
   const pivot = array[begin];
   let ptr_left = begin + 1;
