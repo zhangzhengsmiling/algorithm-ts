@@ -32,8 +32,6 @@ export const partition = (array: number[], begin: number, end: number) => {
   if(array.length === 0) return begin;
   // 随机生成一个下标作为主元，与begin值交换，随机化快排过程
   const idx_pivot = random(begin, end);
-  console.log(idx_pivot);
-  
   swapArray(array, idx_pivot, begin);
   const pivot = array[begin];
   let ptr_left = begin + 1;
@@ -54,7 +52,9 @@ export const partition = (array: number[], begin: number, end: number) => {
  * 单指针从左到右扫描，遇到小于pivot的值
  * 将其置换到数组左侧
  */
-const partition2 = (array: number[], begin: number, end: number) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     + 1;
+export const partition2 = (array: number[], begin: number, end: number) => {       
+  const pivotIdx = random(begin, end);
+  swapArray(array ,pivotIdx, end);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              + 1;
   const pivot = array[end];
   let  ptr_left = begin - 1;
   for(let ptr_right = begin; ptr_right < end; ptr_right++) {
