@@ -64,5 +64,27 @@ describe('link-list test suite:', () => {
       { id: 4 },
     ];
     expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
-  })
+  });
+
+  it('link node remove:', () => {
+    const array: IUser[] = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+    ];
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id - b.id);
+    linkList.remove({id: 3});
+    const temp = [
+      { id: 1 },
+      { id: 2 },
+      { id: 4 },
+    ];
+    try {
+      linkList.remove({id: 5});
+    } catch(err) {
+      expect(err.message).toBe('node is not found')
+    }
+    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+  });
 })

@@ -1,5 +1,3 @@
-import { textSpanIsEmpty } from "typescript";
-
 export class LinkNode<T> {
   public value: T | null = null;
   public next: LinkNode<T> | null = null;
@@ -46,10 +44,27 @@ export default class LinkList<T = number> {
       throw new Error('prev node is not found');
     }
   }
+
+  public remove(value: T) {
+    const comparator: (a: any, b: any) => number = this.comparator ? this.comparator : (a: number, b: number): number => a - b;
+    if(comparator(this.head?.value, value) === 0) {
+      this.head = (this.head as LinkNode<T>).next;
+      return;
+    }
+    let prev = this.head;
+    let ptr = this.head?.next;
+    while(ptr !== null) {
+      if(comparator(ptr?.value, value) === 0 && ptr!==null && prev !==null) {
+        let temp = (prev as LinkNode<T>).next;
+        prev.next = (ptr as LinkNode<T>).next;
+        (ptr as LinkNode<T>).next = null;
+        break;
+      }
+      ptr = ptr?.next;
+      prev = (prev as LinkNode<T>).next;
+    }
+    if(ptr === null) {
+      throw new Error('node is not found');
+    }
+  }
 }
-
-// const array: number[] = [1, 2, 3, 4, 5];
-// const linkList = new LinkList<number>(array);
-
-// linkList.insert(4, 6);
-// console.log(linkList.head)
