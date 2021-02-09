@@ -87,4 +87,24 @@ describe('link-list test suite:', () => {
     }
     expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
   });
+
+  it('link node search:', () => {
+    const array = [1, 2, 3, 4, 5];
+    const list = new LinkList<number>(array);
+    const num = list.search(5);
+    expect(num?.value).toBe(5);
+    const numNotFound = list.search(8);
+    expect(numNotFound).toBe(null);
+    const users = [
+      {id: 1},
+      {id: 2},
+      {id: 3},
+      {id: 4},
+    ]
+    const list2 = new LinkList<IUser>(users, (a, b) => a.id - b.id);
+    const u = list2.search({id: 3});
+    expect(u?.value).toEqual({id: 3});
+    const uNotFound = list2.search({id: 6});
+    expect(uNotFound).toBe(null);
+  })
 })

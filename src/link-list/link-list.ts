@@ -67,4 +67,17 @@ export default class LinkList<T = number> {
       throw new Error('node is not found');
     }
   }
+
+  public search(value: T) {
+    let ptr = this.head;
+    if(ptr === null) return null;
+    let comparator: (a: any, b: any) =>number = this.comparator ? this.comparator : (a: number, b: number): number => a - b;
+    while(ptr) {
+      if(comparator(ptr.value, value) === 0) {
+        return ptr;
+      }
+      ptr = ptr.next;
+    }
+    return null;
+  }
 }
