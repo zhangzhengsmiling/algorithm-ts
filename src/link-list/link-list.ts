@@ -10,7 +10,7 @@ export class LinkNode<T> {
 export default class LinkList<T = number> {
   public head: LinkNode<T> | null = null;
   private comparator: ((prev: T, next: T) => number) | null = null;
-  constructor(arrayList: T[], comparator?: (ptrv: T, next: T) => number) {
+  constructor(arrayList: T[], comparator?: (prev: T, next: T) => number) {
     this.head = this.init(arrayList);
     if(comparator) this.comparator = comparator;
   }
@@ -55,20 +55,20 @@ export default class LinkList<T = number> {
     let ptr = this.head?.next;
     while(ptr !== null) {
       if(comparator(ptr?.value, value) === 0 && ptr!==null && prev !==null) {
-        let temp = (prev as LinkNode<T>).next;
-        prev.next = (ptr as LinkNode<T>).next;
-        (ptr as LinkNode<T>).next = null;
-        break;
+        let temp = prev.next;
+        prev.next = ptr!.next;
+        ptr!.next = null;
+        return temp;
       }
       ptr = ptr?.next;
-      prev = (prev as LinkNode<T>).next;
+      prev = prev!.next;
     }
     if(ptr === null) {
       throw new Error('node is not found');
     }
   }
 
-  public search(value: T) {
+  public search(value: T): LinkNode<T> | null {
     let ptr = this.head;
     if(ptr === null) return null;
     let comparator: (a: any, b: any) =>number = this.comparator ? this.comparator : (a: number, b: number): number => a - b;

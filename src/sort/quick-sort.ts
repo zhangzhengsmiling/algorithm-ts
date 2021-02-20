@@ -1,5 +1,3 @@
-import { forEachTrailingCommentRange } from "typescript";
-
 /**
  * 生成随机值
  * 辅助随机快排算法
