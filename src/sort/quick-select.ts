@@ -1,7 +1,7 @@
-import { partition2 } from './quick-sort';
+import { partition } from './partition';
 const quickSelect = (array: number[], begin: number, end: number, idx: number): number => {
   idx = idx - 1;
-  const mid = partition2(array, begin, end);
+  const mid = partition(array, begin, end);
   if((mid - begin) === idx) return array[mid];
   if((mid - begin) > idx) {
     return quickSelect(array, begin, mid - 1, idx + 1);
