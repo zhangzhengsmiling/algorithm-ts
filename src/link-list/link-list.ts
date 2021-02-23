@@ -1,3 +1,4 @@
+
 export class LinkNode<T> {
   public value: T | null = null;
   public next: LinkNode<T> | null = null;
@@ -7,12 +8,16 @@ export class LinkNode<T> {
   }
 }
 
+type IsEqual<T> = (prev: T, next: T) => boolean;
+
+const defaultIsEaqual = (a: any, b: any) => a === b;
 export default class LinkList<T = number> {
   public head: LinkNode<T> | null = null;
-  private comparator: ((prev: T, next: T) => number) | null = null;
-  constructor(arrayList: T[], comparator?: (prev: T, next: T) => number) {
+  public tail: LinkNode<T> | null = null;
+  private isEaqual?: IsEqual<T>;
+  constructor(arrayList: T[], isEaqual?: IsEqual<T>) {
     this.head = this.init(arrayList);
-    if(comparator) this.comparator = comparator;
+    if(isEaqual) this.isEaqual = isEaqual;
   }
 
   private init(array: T[]): LinkNode<T> | null {
@@ -23,18 +28,22 @@ export default class LinkList<T = number> {
       tail.next = new LinkNode<T>(array[i]);
       tail = tail.next;
     }
+    this.tail = tail;
     return head;
   }
 
   public insert(prev: T, item: T) {
-    const defaultComparator = (a: number, b: number): number => a - b;
-    const comparator: (a: any, b: any) => number = this.comparator !== null ? this.comparator : defaultComparator;
+    const isEaqual: IsEqual<T> = this.isEaqual ? this.isEaqual : defaultIsEaqual;
     let ptr = this.head;
     while(ptr !== null) {
-      if(comparator(ptr.value, prev) === 0) {
+      if(isEaqual(ptr.value as T, prev)) {
         let temp = ptr.next;
         ptr.next = new LinkNode<T>(item);
         ptr.next.next = temp;
+        // 若插入节点为尾节点，更新
+        if(temp === null) {
+          this.tail = ptr.next;
+        }
         temp = null;
         break;
       }
@@ -46,18 +55,23 @@ export default class LinkList<T = number> {
   }
 
   public remove(value: T) {
-    const comparator: (a: any, b: any) => number = this.comparator ? this.comparator : (a: number, b: number): number => a - b;
-    if(comparator(this.head?.value, value) === 0) {
+    const isEaqual: IsEqual<T> = this.isEaqual ? this.isEaqual : defaultIsEaqual;
+    // 链表头节点为空
+    if(this.head === null) return;
+    if(isEaqual(this.head?.value as T, value)) {
       this.head = (this.head as LinkNode<T>).next;
       return;
     }
-    let prev = this.head;
+    let prev: LinkNode<T> | null = this.head;
     let ptr = this.head?.next;
     while(ptr !== null) {
-      if(comparator(ptr?.value, value) === 0 && ptr!==null && prev !==null) {
+      if(isEaqual(ptr?.value as T, value) && ptr!==null && prev !==null) {
         let temp = prev.next;
         prev.next = ptr!.next;
         ptr!.next = null;
+        if(ptr?.next === null) {
+          this.tail = prev;
+        }
         return temp;
       }
       ptr = ptr?.next;
@@ -68,12 +82,17 @@ export default class LinkList<T = number> {
     }
   }
 
+  public add(value: T) {
+    this.tail!.next = new LinkNode<T>(value);
+    this.tail = this.tail!.next;
+  }
+
   public search(value: T): LinkNode<T> | null {
     let ptr = this.head;
     if(ptr === null) return null;
-    let comparator: (a: any, b: any) =>number = this.comparator ? this.comparator : (a: number, b: number): number => a - b;
+    let isEaqual: IsEqual<T> = this.isEaqual ? this.isEaqual : defaultIsEaqual;
     while(ptr) {
-      if(comparator(ptr.value, value) === 0) {
+      if(isEaqual(ptr.value as T, value)) {
         return ptr;
       }
       ptr = ptr.next;

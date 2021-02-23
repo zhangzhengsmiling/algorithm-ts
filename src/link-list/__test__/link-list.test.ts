@@ -54,7 +54,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id - b.id);
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.insert({id: 3}, {id: 8});
     const temp = [
       { id: 1 },
@@ -66,6 +66,98 @@ describe('link-list test suite:', () => {
     expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
   });
 
+  it('link node insert to tail:', () => {
+    const array: IUser[] = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+    ];
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    linkList.insert({id: 4}, {id: 8});
+    const temp = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 8 },
+    ];
+    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+  });
+
+  it('link node add to tail after insert:', () => {
+    const array: IUser[] = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+    ];
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    linkList.remove({ id: 4 });
+    const res = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ]
+    expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
+    linkList.add({ id: 8 })
+    const temp = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 8 },
+    ];
+    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+  });
+
+  it('link node add to tail after remove:', () => {
+    const array: IUser[] = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+    ];
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    linkList.insert({id: 4}, { id: 5 });
+    const res = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 5 },
+    ]
+    expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
+    linkList.add({ id: 8 })
+    const temp = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 5 },
+      { id: 8 },
+    ];
+    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+  });
+
+  it('link node add to tail:', () => {
+    const array: IUser[] = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+    ];
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    linkList.add({id: 8});
+    const temp = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 8 },
+    ];
+    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+  })
+
   it('link node remove:', () => {
     const array: IUser[] = [
       { id: 1 },
@@ -73,7 +165,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id - b.id);
+    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.remove({id: 3});
     const temp = [
       { id: 1 },
@@ -101,7 +193,7 @@ describe('link-list test suite:', () => {
       {id: 3},
       {id: 4},
     ]
-    const list2 = new LinkList<IUser>(users, (a, b) => a.id - b.id);
+    const list2 = new LinkList<IUser>(users, (a, b) => a.id === b.id);
     const u = list2.search({id: 3});
     expect(u?.value).toEqual({id: 3});
     const uNotFound = list2.search({id: 6});
