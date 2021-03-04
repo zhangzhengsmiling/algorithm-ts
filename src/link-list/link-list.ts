@@ -83,6 +83,12 @@ export default class LinkList<T = number> {
   }
 
   public add(value: T) {
+    if(this.tail === null) {
+      // 添加头节点
+      this.head = new LinkNode<T>(value);
+      this.tail = this.head;
+      return;
+    }
     this.tail!.next = new LinkNode<T>(value);
     this.tail = this.tail!.next;
   }
