@@ -3,8 +3,6 @@
  * @param left the first sorted array
  * @param right the other sorted array
  */
-
- let count = 0;
 const merge = (left: number[], right: number[]) => {
   let ptr_left = 0;
   let ptr_right = 0;
@@ -15,7 +13,6 @@ const merge = (left: number[], right: number[]) => {
       ptr_left++;
     } else {
       res.push(right[ptr_right]);
-      count += (left.length - ptr_left);
       ptr_right++;
     }
   }
@@ -29,8 +26,8 @@ const merge = (left: number[], right: number[]) => {
 /**
  * merge sort
  * time complexity, O(nlog n)
- * @param arr 
- * @return a branch new array which is soted withour sharing space 
+ * @param arr
+ * @return a branch new array which is soted withour sharing space
  */
 const mergeSort = (arr: number[]): number[] => {
   if(arr.length <= 1) return arr;
