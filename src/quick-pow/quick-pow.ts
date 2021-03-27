@@ -5,7 +5,8 @@
  * @param n 
  * @returns 
  */
-const quickPowRecursion = (base: number, n: number): number => {
+export const quickPowRecursion = (base: number, n: number): number => {
+  if(n === 0) return 1; 
   if(n === 1) return base;
   if(n % 2 === 0) {
     const _temp = quickPowRecursion(base, n / 2);
@@ -16,7 +17,8 @@ const quickPowRecursion = (base: number, n: number): number => {
   }
 }
 
-const quickPow = (base: number, n: number) => {
+export const quickPow = (base: number, n: number) => {
+  if(n === 0) return 1;
   let res = base;
   while(n > 1) {
     if(n % 2 === 0) {
@@ -29,11 +31,3 @@ const quickPow = (base: number, n: number) => {
   }
   return res;
 }
-
-const base = 2;
-const n = 2000000;
-const r = quickPow(base, n)
-const res = quickPow(base, n);
-console.log(res=== r);
-
-// a^n = (a ^ 2) ^(n / 2)
