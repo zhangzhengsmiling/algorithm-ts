@@ -1,4 +1,4 @@
-class Matrix {
+export default class Matrix {
   value: number[][];
   rows: number;
   cols: number;
@@ -7,7 +7,7 @@ class Matrix {
     this.cols = cols;
     this.value = new Array(rows)
       .fill("")
-      .map(item => new Array(cols));
+      .map(item => new Array(cols).fill(0));
   }
 
   fill(num: number): Matrix {
@@ -29,14 +29,26 @@ class Matrix {
   }
 
   multiple(matrix: Matrix) {
-    
+    if(this.cols !== matrix.rows) throw new Error('not permission...');
+    const m1 = this.value;
+    const m2 = matrix.value;
+    const rows = this.rows;
+    const cols = matrix.cols;
+    const mRes = new Array(rows).fill('')
+      .map(
+        item => new Array(cols)
+      );
+    for(let i = 0; i < rows; i++) {
+      for(let j = 0; j < cols; j++) {
+        let res = 0;
+        for(let k = 0; k < this.cols; k++) {
+          res += m1[i][k] * m2[k][j];
+        }
+        mRes[i][j] = res;
+      }
+    }
+    const matrixRes = new Matrix(rows, cols);
+    matrixRes.set(mRes);
+    return matrixRes;
   }
 }
-
-const matrix = new Matrix(2, 2);
-matrix.set([
-  [10, 10],
-  [2, 2]
-])
-
-console.log(matrix.value);
