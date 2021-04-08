@@ -51,4 +51,45 @@ export default class Matrix {
     matrixRes.set(mRes);
     return matrixRes;
   }
+
+  fastPow(n: number): Matrix{
+    const matrix: Matrix = new Matrix(
+      this.rows, this.cols
+    );
+    matrix.set(this.value);
+    if(n === 0) return matrix;
+    let res: Matrix = matrix;
+    while(n > 1) {
+      if(n % 2 === 0) {
+        res = res.multiple(res);
+        n = n / 2;
+      } else {
+        res = matrix.multiple(res).multiple(res);
+        n = (n - 1) / 2;
+      }
+    }
+    return res;
+  }
+}
+
+
+const fabonacci = (n: number) => {
+  if(n < 2) return 1;
+  const base = new Matrix(1, 2);
+  base.set([
+    [1, 1]
+  ]);
+  const matrix = new Matrix(2, 2);
+  matrix.set([
+    [1, 1],
+    [1, 0]
+  ])
+  const res = base.multiple(matrix.fastPow(n - 1));
+  return res.value[0][0];
+}
+
+for(let i = 0; i < 100; i++) {
+  console.log(
+    fabonacci(i)
+  )
 }
