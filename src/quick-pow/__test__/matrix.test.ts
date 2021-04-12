@@ -73,5 +73,40 @@ describe('matrix:', () => {
       [14, 14],
       [32, 32],
     ]);
+  });
+
+  it('fast power:', () => {
+
+    const matrix = new Matrix(2, 2);
+    matrix.set([
+      [2, 4],
+      [4, 2]
+    ]);
+
+    const target = new Matrix(2, 2);
+    target.set([
+      [1, 0],
+      [0, 1]
+    ])
+    expect(matrix.fastPow(0)).toEqual(
+      new Matrix(2, 2).set([
+        [1, 0],
+        [0, 1]
+      ])
+    );
+
+    expect(matrix.fastPow(2)).toEqual(
+      new Matrix(2, 2).set([
+        [20, 16],
+        [16, 20]
+      ])
+    );
+
+    expect(matrix.fastPow(4)).toEqual(
+      new Matrix(2, 2).set([
+        [656, 640],
+        [640, 656]
+      ])
+    )
   })
 })
