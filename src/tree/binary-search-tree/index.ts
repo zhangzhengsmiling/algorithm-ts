@@ -1,37 +1,4 @@
 
-const root = {
-  value: 100,
-  left: {
-    value: 200,
-    left: null,
-    right: null,
-    parent: null,
-  },
-  right: {
-    value: 300,
-    left: null,
-    right: null,
-    parent: null,
-  }
-}
-
-// root.left.parent = root;
-// root.right.parent = root;
-
-// let child_ptr = root.left;
-// const bool = child_ptr.parent === root
-// console.log(bool === true);
-// console.log(root.left.parent);
-
-
-// interface TreeNode<DataType> {
-//   key: number;
-//   value: DataType;
-//   left: TreeNode<DataType> | null;
-//   right: TreeNode<DataType> | null;
-//   parent: TreeNode<DataType> | null;
-// }
-
 class TreeNode<DataType> {
   public key: number;
   public value: DataType;
@@ -66,11 +33,137 @@ class BinarySearchTree<DataType> {
     else _p.right = node;
   }
 
+  find(key: number): TreeNode<DataType> {
+    let ptr = this.root;
+    while(ptr !== null) {
+      if (key === ptr.key) return ptr;
+      if (key < ptr.key) ptr = ptr.left;
+      else ptr = ptr.right;
+    }
+    throw new Error(`key: ${key} is not found...`);
+  }
+
+  search(key: number): DataType {
+    const target = this.find(key);
+    return target.value;
+  }
+
+  delete(key: number) {
+    const target = this.find(key);
+    if (target.left === null && target.right === null) {
+      if (target.parent === null) return this.root = null;
+      if (target.parent.left === target) return target.parent.left = null;
+      else if (target.parent.right === target) return target.parent.right = null;
+    }
+    
+    // const target = this.find(key);
+    // let parent = target.parent;
+    // const replaceNode = this._prev(target) || this._next(target);
+    // if (parent.left === target) {
+    //   // target为左子节点
+    //   parent.left = replaceNode;
+    //   replaceNode.parent = parent;
+    // } else {
+    //   parent.right = replaceNode;
+    //   replaceNode.parent = parent;
+    // }
+  }
+
+  _max(node: TreeNode<DataType>): TreeNode<DataType> {
+    let ptr = node;
+    let p = null;
+    while(ptr !== null) {
+      p = ptr;
+      ptr = ptr.right;
+    }
+    return p;
+  }
+
+  _min(node: TreeNode<DataType>): TreeNode<DataType> {
+    let ptr = node;
+    let p = null;
+    while(ptr !== null) {
+      p = ptr;
+      ptr = ptr.left;
+    }
+    return p;
+  }
+
+  // 计算节点的后继节点
+  _next(node: TreeNode<DataType>): TreeNode<DataType> {
+    if (node === null) return null;
+    if (node.right !== null) {
+      return this._min(node.right);
+    } else {
+      return node.parent;
+    }
+  }
+
+  // 计算节点的前驱节点
+  _prev(node: TreeNode<DataType>): TreeNode<DataType> {``
+    if (node === null) return null;
+
+    // node存在左子节点
+    if (node.left !== null) {
+      return this._max(node.left);
+    } else {
+      // return 
+      // if node is left node:  
+      // if node is right node: return node.parent
+      if (node.parent === null) return null;
+      if (node.parent.right === node) {
+        // node为右子节点
+        return node.parent;
+      } else {
+        let ptr = node;
+        while(ptr.parent.left === ptr) {
+          ptr = ptr.parent;
+        }
+        // console.log(node.parent);
+        return ptr.parent;
+      }
+    }
+  }
 }
 
 const bst = new BinarySearchTree<number>();
+
+
+// bst.insert(100, 100);
+// bst.insert(60, 60);
+// bst.insert(64, 64);
+// bst.insert(68, 68);
+// bst.insert(80, 80);
+// bst.insert(90, 90);
+
 bst.insert(100, 100);
 bst.insert(200, 200);
-bst.insert(300, 300);
-bst.insert(150, 150);
+bst.insert(170, 170);
+// bst.insert(160, 160);
+// bst.insert(140, 140);
+
+// console.log(bst.root);
+const node = bst.root;
+
+// const node = bst.root.left.right.right.right.right;
+
+console.log(node);
+// console.log(bst._prev(node));
+// const prev = bst._prev(node)
+// console.log(prev);
+
+bst.delete(170);
 console.log(bst.root);
+bst.delete(200);
+console.log(bst.root);
+bst.delete(100);
+console.log(bst.root);
+
+// console.log(bst.root);
+// console.log(bst.root);
+// console.log(bst._max(bst.root));
+// console.log(bst._min(bst.root));
+// console.log(bst._next(bst.root));
+// const value = bst.search(150);
+// console.log(value)
+
