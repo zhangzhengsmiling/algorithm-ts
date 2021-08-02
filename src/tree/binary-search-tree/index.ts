@@ -48,12 +48,33 @@ class BinarySearchTree<DataType> {
     return target.value;
   }
 
-  delete(key: number) {
-    const target = this.find(key);
+  delete(key: number): boolean {
+    const target = this.find(key); // 此处假设可以找到
+    const parent = target.parent,
+    left = target.left,
+    right = target.right;
+
     if (target.left === null && target.right === null) {
-      if (target.parent === null) return this.root = null;
-      if (target.parent.left === target) return target.parent.left = null;
-      else if (target.parent.right === target) return target.parent.right = null;
+      // 左子节点
+      if (target.parent.left === target) target.parent.left = null;
+      else if (target.parent.right === target) target.parent.right = null;
+      return true;
+    } else if (target.left !== null && target.right !== null) {
+      // target节点既有左节点又有右节点
+      const next = this._min(target.right);
+      next.parent = parent;
+      next.left = left;
+      next.right = right;
+      return true;
+    } else {
+      // 只有左子节点或者右子节点
+      const next = target.left || target.right;
+      if (target.parent === null) this.root = next;
+      else if(target.parent.left === target) target.parent.left = next;
+      else if(target.parent.right === target) target.parent.right = next;
+      next.parent = parent;
+      // console.log(this.root)
+      return false;
     }
     
     // const target = this.find(key);
@@ -146,18 +167,18 @@ bst.insert(170, 170);
 const node = bst.root;
 
 // const node = bst.root.left.right.right.right.right;
-
-console.log(node);
+bst.delete(200);
+console.log(bst.root)
 // console.log(bst._prev(node));
 // const prev = bst._prev(node)
 // console.log(prev);
 
-bst.delete(170);
-console.log(bst.root);
-bst.delete(200);
-console.log(bst.root);
-bst.delete(100);
-console.log(bst.root);
+// bst.delete(170);
+// console.log(bst.root);
+// bst.delete(200);
+// console.log(bst.root);
+// bst.delete(100);
+// console.log(bst.root);
 
 // console.log(bst.root);
 // console.log(bst.root);
