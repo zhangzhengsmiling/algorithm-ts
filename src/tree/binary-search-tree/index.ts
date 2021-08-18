@@ -49,44 +49,98 @@ class BinarySearchTree<DataType> {
   }
 
   delete(key: number): boolean {
-    const target = this.find(key); // 此处假设可以找到
-    const parent = target.parent,
-    left = target.left,
-    right = target.right;
-
+    const target = this.find(key);
     if (target.left === null && target.right === null) {
-      // 左子节点
-      if (target.parent.left === target) target.parent.left = null;
-      else if (target.parent.right === target) target.parent.right = null;
+      // 目标节点没有子节点的情况
+      if (target.parent === null) {
+        this.root = null;
+        return true;
+      } else {
+        const flag = target.parent.left === target ? 'left' : 'right';
+        target.parent[flag] = null;
+        target.parent = null;
+        return true;
+      }
+    } else if(target.left !== null && target.right !== null) {
+      const next = this._next(target);
+      if (target.parent === null) {
+        if (next.parent.left === next) {
+          next.parent.left = null;
+        } else {
+          next.parent.right = null;
+        }
+        this.root = next;
+        next.left = target.left;
+        next.right = target.right;
+        target.left && (target.left.parent = next);
+        target.right && (target.right.parent = next);
+        target.parent = null;
+        target.left = null;
+        target.right = null;
+      } else {
+        if (next.parent.left === next) {
+          next.parent.left = null;
+        } else {
+          next.parent.right = null;
+        }
+        // this.root = next;
+        const parentFlag = target.parent.left === target ? 'left' : 'right';
+        target.parent[parentFlag] = next;
+        next.left = target.left;
+        next.right = target.right;
+        next.parent = target.parent;
+        target.left && (target.left.parent = next);
+        target.right && (target.right.parent = next);
+        target.parent = null;
+        target.left = null;
+        target.right = null;
+      }
       return true;
-    } else if (target.left !== null && target.right !== null) {
-      // target节点既有左节点又有右节点
-      const next = this._min(target.right);
-      next.parent = parent;
-      next.left = left;
-      next.right = right;
-      return true;
+
     } else {
-      // 只有左子节点或者右子节点
-      const next = target.left || target.right;
-      if (target.parent === null) this.root = next;
-      else if(target.parent.left === target) target.parent.left = next;
-      else if(target.parent.right === target) target.parent.right = next;
-      next.parent = parent;
-      // console.log(this.root)
-      return false;
+      // 有且仅有左子节点或者右子节点
+      const targetFlag = target.left === null ? 'right' : 'left';
+      const targetParent = target.parent;
+      if (targetParent === null) {
+        // 根节点
+        this.root = target[targetFlag];
+      } else {
+        const parentFlag = target.parent.left === target ? 'left' : 'right';
+        const parent = target.parent;
+        parent[parentFlag] = target[targetFlag];
+      }
+      target[targetFlag].parent = targetParent;
+      target.parent = null;
+      target.left = null;
+      target.right = null;
+      return true;
     }
-    
-    // const target = this.find(key);
-    // let parent = target.parent;
-    // const replaceNode = this._prev(target) || this._next(target);
-    // if (parent.left === target) {
-    //   // target为左子节点
-    //   parent.left = replaceNode;
-    //   replaceNode.parent = parent;
+    // const target = this.find(key); // 此处假设可以找到
+    // const parent = target.parent,
+    // left = target.left,
+    // right = target.right;
+
+    // if (target.left === null && target.right === null) {
+    //   // 左子节点
+    //   if (target.parent.left === target) target.parent.left = null;
+    //   else if (target.parent.right === target) target.parent.right = null;
+    //   return true;
+    // } else if (target.left !== null && target.right !== null) {
+    //   // target节点既有左节点又有右节点
+    //   const next = this._min(target.right);
+    //   next.parent = parent;
+    //   next.left = left;
+    //   next.right = right;
+    //   return true;
     // } else {
-    //   parent.right = replaceNode;
-    //   replaceNode.parent = parent;
+    //   // 只有左子节点或者右子节点
+    //   const next = target.left || target.right;
+    //   if (target.parent === null) this.root = next;
+    //   else if(target.parent.left === target) target.parent.left = next;
+    //   else if(target.parent.right === target) target.parent.right = next;
+    //   next.parent = parent;
+    //   // console.log(this.root)
+    //   return false;
     // }
   }
 
@@ -147,7 +201,45 @@ class BinarySearchTree<DataType> {
   }
 }
 
+function in_order(root) {
+  if(!root) return;
+
+  let stack = [root];
+  let ptr = root.left;
+  let _p = root;
+  while(stack.length > 0 || ptr !== null) {
+    while(ptr) {
+      stack.push(ptr);
+      ptr = ptr.left
+    }
+    let target = stack.pop();
+    console.log(target.key);
+    ptr = target.right;
+  }
+}
+
+// const bst = new BinarySearchTree<number>();
 const bst = new BinarySearchTree<number>();
+bst.insert(10, 10);
+// bst.insert(5, 5);
+bst.insert(7, 7);
+// bst.insert(6, 6);
+bst.insert(3, 3);
+bst.insert(8, 8);
+// bst.insert(4, 4);
+bst.insert(15, 15);
+bst.insert(20, 20);
+// bst.insert(2, 2);
+
+// console.log(bst.root);
+// in_order(bst.root);
+console.log(bst.root);
+bst.delete(7);
+console.log('--------------------')
+// in_order(bst.root);
+console.log(bst.root)
+// console.log(bst.root === null)
+// console.log(bst.root);
 
 
 // bst.insert(100, 100);
@@ -157,18 +249,18 @@ const bst = new BinarySearchTree<number>();
 // bst.insert(80, 80);
 // bst.insert(90, 90);
 
-bst.insert(100, 100);
-bst.insert(200, 200);
-bst.insert(170, 170);
+// bst.insert(100, 100);
+// bst.insert(200, 200);
+// bst.insert(170, 170);
 // bst.insert(160, 160);
 // bst.insert(140, 140);
 
 // console.log(bst.root);
-const node = bst.root;
+// const node = bst.root;
 
 // const node = bst.root.left.right.right.right.right;
-bst.delete(200);
-console.log(bst.root)
+// bst.delete(100);
+// console.log(bst.root)
 // console.log(bst._prev(node));
 // const prev = bst._prev(node)
 // console.log(prev);
