@@ -13,6 +13,32 @@ class TreeNode<DataType> {
     this.right = null;
     this.parent = null;
   }
+
+  public reset() {
+    this.left = null;
+    this.right = null;
+    this.parent = null;
+  }
+
+  public isLeftChild() {
+    if (this.parent === null) return false;
+    if (this.parent.left === this) return true;
+    else return false;
+  }
+
+  public isRightChild() {
+    if (this.parent === null) return false;
+    else return !this.isLeftChild();
+  }
+
+  public isRoot() {
+    return this.parent === null;
+  }
+
+  public isLeafNode() {
+    return this.left === null && this.right === null;
+  }
+
 }
 
 class BinarySearchTree<DataType> {
@@ -49,99 +75,53 @@ class BinarySearchTree<DataType> {
   }
 
   delete(key: number): boolean {
-    const target = this.find(key);
-    if (target.left === null && target.right === null) {
+    let target = this.find(key);
+    if (target === null) return false;
+    if (target.isLeafNode()) {
       // 目标节点没有子节点的情况
-      if (target.parent === null) {
+      if (target.isRoot()) {
         this.root = null;
-        return true;
       } else {
-        const flag = target.parent.left === target ? 'left' : 'right';
+        const flag = target.isLeftChild() ? 'left' : 'right';
         target.parent[flag] = null;
         target.parent = null;
-        return true;
       }
     } else if(target.left !== null && target.right !== null) {
       const next = this._next(target);
-      if (target.parent === null) {
-        if (next.parent.left === next) {
-          next.parent.left = null;
-        } else {
-          next.parent.right = null;
-        }
-        this.root = next;
-        next.left = target.left;
-        next.right = target.right;
-        target.left && (target.left.parent = next);
-        target.right && (target.right.parent = next);
-        target.parent = null;
-        target.left = null;
-        target.right = null;
+      if (next.isLeftChild()) {
+        next.parent.left = null;
       } else {
-        if (next.parent.left === next) {
-          next.parent.left = null;
-        } else {
-          next.parent.right = null;
-        }
-        // this.root = next;
+        next.parent.right = null;
+      }
+      if (target.isRoot()) {
+        this.root = next;
+      } else {
         const parentFlag = target.parent.left === target ? 'left' : 'right';
         target.parent[parentFlag] = next;
-        next.left = target.left;
-        next.right = target.right;
-        next.parent = target.parent;
-        target.left && (target.left.parent = next);
-        target.right && (target.right.parent = next);
-        target.parent = null;
-        target.left = null;
-        target.right = null;
       }
-      return true;
-
+      next.left = target.left;
+      next.right = target.right;
+      next.parent = target.parent;
+      target.left && (target.left.parent = next);
+      target.right && (target.right.parent = next);
+      target.reset();
     } else {
       // 有且仅有左子节点或者右子节点
       const targetFlag = target.left === null ? 'right' : 'left';
       const targetParent = target.parent;
-      if (targetParent === null) {
+      if (target.isRoot()) {
         // 根节点
         this.root = target[targetFlag];
       } else {
-        const parentFlag = target.parent.left === target ? 'left' : 'right';
+        const parentFlag = target.isLeftChild() ? 'left' : 'right';
         const parent = target.parent;
         parent[parentFlag] = target[targetFlag];
       }
       target[targetFlag].parent = targetParent;
-      target.parent = null;
-      target.left = null;
-      target.right = null;
-      return true;
+      target.reset();
     }
-    // const target = this.find(key); // 此处假设可以找到
-    // const parent = target.parent,
-    // left = target.left,
-    // right = target.right;
-
-    // if (target.left === null && target.right === null) {
-    //   // 左子节点
-    //   if (target.parent.left === target) target.parent.left = null;
-    //   else if (target.parent.right === target) target.parent.right = null;
-    //   return true;
-    // } else if (target.left !== null && target.right !== null) {
-    //   // target节点既有左节点又有右节点
-    //   const next = this._min(target.right);
-    //   next.parent = parent;
-    //   next.left = left;
-    //   next.right = right;
-    //   return true;
-    // } else {
-    //   // 只有左子节点或者右子节点
-    //   const next = target.left || target.right;
-    //   if (target.parent === null) this.root = next;
-    //   else if(target.parent.left === target) target.parent.left = next;
-    //   else if(target.parent.right === target) target.parent.right = next;
-    //   next.parent = parent;
-    //   // console.log(this.root)
-    //   return false;
-    // }
+    target = null;
+    return true;
   }
 
   _max(node: TreeNode<DataType>): TreeNode<DataType> {
@@ -232,12 +212,12 @@ bst.insert(20, 20);
 // bst.insert(2, 2);
 
 // console.log(bst.root);
-// in_order(bst.root);
-console.log(bst.root);
+in_order(bst.root);
+// console.log(bst.root);
 bst.delete(7);
 console.log('--------------------')
-// in_order(bst.root);
-console.log(bst.root)
+in_order(bst.root);
+// console.log(bst.root)
 // console.log(bst.root === null)
 // console.log(bst.root);
 
