@@ -1,5 +1,5 @@
-
-class TreeNode<DataType> {
+import in_order from "../tranversal/in-order";
+export class TreeNode<DataType> {
   public key: number;
   public value: DataType;
   public left: TreeNode<DataType> | null;
@@ -41,7 +41,7 @@ class TreeNode<DataType> {
 
 }
 
-class BinarySearchTree<DataType> {
+export default class BinarySearchTree<DataType> {
   root: TreeNode<DataType> = null;
 
   insert(key: number, value: DataType) {
@@ -88,11 +88,8 @@ class BinarySearchTree<DataType> {
       }
     } else if(target.left !== null && target.right !== null) {
       const next = this._next(target);
-      if (next.isLeftChild()) {
-        next.parent.left = null;
-      } else {
-        next.parent.right = null;
-      }
+      const flag = next.isLeftChild() ? 'left' : 'right';
+      next.parent[flag] = next.right;
       if (target.isRoot()) {
         this.root = next;
       } else {
@@ -148,9 +145,14 @@ class BinarySearchTree<DataType> {
   _next(node: TreeNode<DataType>): TreeNode<DataType> {
     if (node === null) return null;
     if (node.right !== null) {
+      // 节点node存在右子树
       return this._min(node.right);
     } else {
-      return node.parent;
+      let ptr = node;
+      while(ptr.parent !== null && ptr !== ptr.parent.left) {
+        ptr = ptr.parent;
+      }
+      return ptr.parent;
     }
   }
 
@@ -181,82 +183,20 @@ class BinarySearchTree<DataType> {
   }
 }
 
-function in_order(root) {
-  if(!root) return;
 
-  let stack = [root];
-  let ptr = root.left;
-  let _p = root;
-  while(stack.length > 0 || ptr !== null) {
-    while(ptr) {
-      stack.push(ptr);
-      ptr = ptr.left
-    }
-    let target = stack.pop();
-    console.log(target.key);
-    ptr = target.right;
-  }
-}
-
-// const bst = new BinarySearchTree<number>();
 const bst = new BinarySearchTree<number>();
-bst.insert(10, 10);
-// bst.insert(5, 5);
+bst.insert(17, 17);
+bst.insert(5, 5);
+bst.insert(2, 2);
+bst.insert(11, 11);
+bst.insert(9, 9);
+bst.insert(16, 16);
 bst.insert(7, 7);
-// bst.insert(6, 6);
-bst.insert(3, 3);
 bst.insert(8, 8);
-// bst.insert(4, 4);
-bst.insert(15, 15);
-bst.insert(20, 20);
-// bst.insert(2, 2);
-
-// console.log(bst.root);
-in_order(bst.root);
-// console.log(bst.root);
+bst.insert(35, 35);
+bst.insert(29, 29);
+bst.insert(38, 38);
+in_order(bst.root, item => console.log(item.key));
 bst.delete(7);
 console.log('--------------------')
-in_order(bst.root);
-// console.log(bst.root)
-// console.log(bst.root === null)
-// console.log(bst.root);
-
-
-// bst.insert(100, 100);
-// bst.insert(60, 60);
-// bst.insert(64, 64);
-// bst.insert(68, 68);
-// bst.insert(80, 80);
-// bst.insert(90, 90);
-
-// bst.insert(100, 100);
-// bst.insert(200, 200);
-// bst.insert(170, 170);
-// bst.insert(160, 160);
-// bst.insert(140, 140);
-
-// console.log(bst.root);
-// const node = bst.root;
-
-// const node = bst.root.left.right.right.right.right;
-// bst.delete(100);
-// console.log(bst.root)
-// console.log(bst._prev(node));
-// const prev = bst._prev(node)
-// console.log(prev);
-
-// bst.delete(170);
-// console.log(bst.root);
-// bst.delete(200);
-// console.log(bst.root);
-// bst.delete(100);
-// console.log(bst.root);
-
-// console.log(bst.root);
-// console.log(bst.root);
-// console.log(bst._max(bst.root));
-// console.log(bst._min(bst.root));
-// console.log(bst._next(bst.root));
-// const value = bst.search(150);
-// console.log(value)
-
+in_order(bst.root, item => console.log(item.key));
