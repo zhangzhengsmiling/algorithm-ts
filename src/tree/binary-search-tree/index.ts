@@ -1,4 +1,4 @@
-import in_order from "../tranversal/in-order";
+import in_order from "../transversal/in-order";
 export class TreeNode<DataType> {
   public key: number;
   public value: DataType;
@@ -182,21 +182,3 @@ export default class BinarySearchTree<DataType> {
     }
   }
 }
-
-
-const bst = new BinarySearchTree<number>();
-bst.insert(17, 17);
-bst.insert(5, 5);
-bst.insert(2, 2);
-bst.insert(11, 11);
-bst.insert(9, 9);
-bst.insert(16, 16);
-bst.insert(7, 7);
-bst.insert(8, 8);
-bst.insert(35, 35);
-bst.insert(29, 29);
-bst.insert(38, 38);
-in_order(bst.root, item => console.log(item.key));
-bst.delete(7);
-console.log('--------------------')
-in_order(bst.root, item => console.log(item.key));

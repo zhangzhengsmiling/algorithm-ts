@@ -1,4 +1,3 @@
-import { isForOfStatement } from 'typescript';
 import MaxHeap from './max-heap';
 
 class PriorityQueue extends MaxHeap {

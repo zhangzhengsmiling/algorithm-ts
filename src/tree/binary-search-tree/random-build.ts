@@ -1,5 +1,4 @@
-import BinarySearchTree, { TreeNode } from ".";
-import in_order from "../tranversal/in-order";
+import BinarySearchTree, { TreeNode } from './index';
 import fs from 'fs';
 
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

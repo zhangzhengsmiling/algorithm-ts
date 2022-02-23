@@ -12,17 +12,6 @@ export class TTreeNode<DataType> {
   }
 }
 
-// function in_order(root) {
-//   if (root.left)
-//       in_order(root.left);
-  
-//   console.log(root.key);
-  
-//   if (root.right)
-//       in_order(root.right);
-// }
-
-
 export default function in_order(root, callback) {
   if(!root) return;
   let stack = [root];

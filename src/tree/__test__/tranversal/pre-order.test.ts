@@ -1,4 +1,4 @@
-import { preOrderTranversalRecursion, preOrderTranversal, BinaryTree } from '../../tranversal/pre-order';
+import { preOrderTransversalRecursion, preOrderTransversal, BinaryTree } from '../../transversal/pre-order';
 
 describe('pre order recursion test suite:', () => {
 
@@ -33,8 +33,8 @@ describe('pre order recursion test suite:', () => {
   }
 
   it('module import:', () => {
-    expect(preOrderTranversalRecursion).toBeInstanceOf(Function);
-    expect(preOrderTranversal).toBeInstanceOf(Function);
+    expect(preOrderTransversalRecursion).toBeInstanceOf(Function);
+    expect(preOrderTransversal).toBeInstanceOf(Function);
   });
 
   it('preorder test:', () => {
@@ -48,19 +48,19 @@ describe('pre order recursion test suite:', () => {
       left: null,
       right: null,
     }
-    preOrderTranversalRecursion<number>(bt, cb);
+    preOrderTransversalRecursion<number>(bt, cb);
     expect(arr).toEqual([100])
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
-    preOrderTranversalRecursion(binaryTree, d => res.push(d));
+    preOrderTransversalRecursion(binaryTree, d => res.push(d));
     expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
-    preOrderTranversal(binaryTree, d => res.push(d));
+    preOrderTransversal(binaryTree, d => res.push(d));
     expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
   });
 
@@ -75,7 +75,7 @@ describe('pre order recursion test suite:', () => {
       left: null,
       right: null,
     }
-    preOrderTranversal<number>(bt, cb);
+    preOrderTransversal<number>(bt, cb);
     expect(arr).toEqual([100])
   });
 
