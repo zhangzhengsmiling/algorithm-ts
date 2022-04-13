@@ -6,7 +6,7 @@
  */
 const random = (start: number, end: number) => {
   return Math.floor(start + Math.random() * (end - start + 1));
-}
+};
 
 /**
  * 交换数组中的两个元素位置
@@ -18,7 +18,7 @@ const swapArray = (array: number[], index1: number, index2: number) => {
   const temp = array[index1];
   array[index1] = array[index2];
   array[index2] = temp;
-}
+};
 /**
  * partition algorithm
  * 声明两个指针，分别从数组左右两端扫描，
@@ -40,7 +40,7 @@ export const partition = (array: number[], begin: number, end: number) => {
   }
   array[ptrLeft] = pivot;
   return ptrLeft;
-}
+};
 
 /**
  * 单指针从左到右扫描，遇到小于pivot的值
@@ -59,4 +59,4 @@ export const partition2 = (array: number[], begin: number, end: number) => {
   }
   swapArray(array, ptrLeft + 1, end);
   return ptrLeft + 1;
-}
+};

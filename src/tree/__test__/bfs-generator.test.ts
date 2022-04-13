@@ -35,5 +35,5 @@ describe('bfs generator test suite:', () => {
     bfs(temp);
     bfs(temp, (v) => arr.push(v?.value));
     expect(arr).toEqual([1, 2, 3, 4, 7, 6, 5]);
-  })
-})
+  });
+});

@@ -19,7 +19,7 @@ describe('binary tree:', () => {
       val: 'hello, world',
       left: null,
       right: null,
-    })
+    });
   });
 
   it('init a binary tree:', () => {
@@ -37,7 +37,7 @@ describe('binary tree:', () => {
           left: null,
           right: null
         }
-      })
+      });
 
     expect(bh.init([1, 2, 3, null, 4, 5]))
       .toEqual({
@@ -52,7 +52,7 @@ describe('binary tree:', () => {
           left: { val: 5, left: null, right: null },
           right: null,
         }
-      })
+      });
 
     try {
       bh.init([1, null, 3, 4, 5, 6]);
@@ -66,8 +66,8 @@ describe('binary tree:', () => {
     const tree = bh.init([1, 2, 3, 4, 5, 6, 7]);
     const temp: number[] = [];
     bh.preOrder(item => {
-      temp.push(item as number)
+      temp.push(item as number);
     });
     expect(temp).toEqual([1, 2, 4, 5, 3, 6, 7]);
-  })
-})
+  });
+});

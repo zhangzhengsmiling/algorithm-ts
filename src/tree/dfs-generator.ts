@@ -1,16 +1,16 @@
 const dfsGenerator = <T>(dfsKey: keyof T) => {
   const dfs = (tree: T | null, callback?: (v: T | null) => void) => {
     if(tree === null || tree === undefined) return;
-    const children = tree[dfsKey]
+    const children = tree[dfsKey];
     if(typeof callback === 'function') {
-      callback(tree)
+      callback(tree);
     }
     if(children instanceof Array && children.length > 0) {
       children.forEach(item => {
         dfs(item, callback);
-      })
+      });
     }
-  }
+  };
   const dfsByStack = (tree: T | null, callback?: (v: T | null) => void) => {
     if(tree === null || tree === undefined) return;
     const stack: T[] = [];
@@ -27,8 +27,8 @@ const dfsGenerator = <T>(dfsKey: keyof T) => {
         }
       }
     }
-  }
+  };
   return dfsByStack;
-}
+};
 
 export default dfsGenerator;

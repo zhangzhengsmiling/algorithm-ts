@@ -8,6 +8,6 @@ const quickSelect = (array: number[], begin: number, end: number, idx: number): 
   } else {
     return quickSelect(array, mid + 1, end, idx - (mid - begin));
   }
-}
+};
 
 export default quickSelect;

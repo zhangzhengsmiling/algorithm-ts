@@ -26,7 +26,7 @@ class PriorityQueue<ADT extends IComparable> extends MaxHeap<ADT> {
       .filter(item => item !== null)
       .findIndex(
         item => item.key === oldKey
-      )
+      );
     if (targetIndex === -1) return false;
     targetIndex++;
     _heap[targetIndex].key = newKey;
@@ -48,19 +48,5 @@ class PriorityQueue<ADT extends IComparable> extends MaxHeap<ADT> {
     this.shiftUp(_heap.length - 1);
   }
 
-  
-
 }
-
-
-const list = [
-  2, 35,2213,45, 5, 456, 754,7, 233,33
-]
-
-const queue = new PriorityQueue(list.map(item => ({
-  value: item,
-  key: item
-})))
-
-console.log(queue.data)
 

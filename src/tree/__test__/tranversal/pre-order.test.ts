@@ -1,4 +1,4 @@
-import { preOrderTranversalRecursion, preOrderTranversal, BinaryTree } from '../../tranversal/pre-order';
+import { preOrderTransversalRecursion, preOrderTransversal, BinaryTree } from '../../transversal/pre-order';
 
 describe('pre order recursion test suite:', () => {
 
@@ -30,53 +30,53 @@ describe('pre order recursion test suite:', () => {
         right: null,
       }
     }
-  }
+  };
 
   it('module import:', () => {
-    expect(preOrderTranversalRecursion).toBeInstanceOf(Function);
-    expect(preOrderTranversal).toBeInstanceOf(Function);
+    expect(preOrderTransversalRecursion).toBeInstanceOf(Function);
+    expect(preOrderTransversal).toBeInstanceOf(Function);
   });
 
   it('preorder test:', () => {
     const arr: number[] = [];
     const cb = (value: number) => {
       arr.push(value);
-    }
+    };
   
     const bt = {
       value: 100,
       left: null,
       right: null,
-    }
-    preOrderTranversalRecursion<number>(bt, cb);
-    expect(arr).toEqual([100])
+    };
+    preOrderTransversalRecursion<number>(bt, cb);
+    expect(arr).toEqual([100]);
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
-    preOrderTranversalRecursion(binaryTree, d => res.push(d));
-    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
+    preOrderTransversalRecursion(binaryTree, d => res.push(d));
+    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600]);
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
-    preOrderTranversal(binaryTree, d => res.push(d));
-    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
+    preOrderTransversal(binaryTree, d => res.push(d));
+    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600]);
   });
 
   it('preorder test:', () => {
     const arr: number[] = [];
     const cb = (value: number) => {
       arr.push(value);
-    }
+    };
   
     const bt = {
       value: 100,
       left: null,
       right: null,
-    }
-    preOrderTranversal<number>(bt, cb);
-    expect(arr).toEqual([100])
+    };
+    preOrderTransversal<number>(bt, cb);
+    expect(arr).toEqual([100]);
   });
 
-})
+});

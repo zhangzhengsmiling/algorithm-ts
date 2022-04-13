@@ -50,7 +50,7 @@ class BinaryTree<DataType> {
   // 二叉树前序遍历
   public preOrder = (callback?: (val?: DataType) => void) => {
     this.recursion(this.root, callback);
-  }
+  };
 
   public recursion = (root: BinaryTreeNode<DataType> | null, callback?: (val?: DataType) => void) => {
     if (root === null) return;
@@ -59,9 +59,9 @@ class BinaryTree<DataType> {
     }
     if(root !== null) {
       this.recursion(root.left, callback);
-      this.recursion(root.right, callback)
+      this.recursion(root.right, callback);
     }
-  }
+  };
 }
 
 export default BinaryTree;

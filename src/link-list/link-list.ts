@@ -22,7 +22,7 @@ export default class LinkList<T = number> {
 
   private init(array: T[]): LinkNode<T> | null {
     if(array.length === 0) return null;
-    let head = new LinkNode<T>(array[0]);
+    const head = new LinkNode<T>(array[0]);
     let tail = head;
     for(let i = 1; i < array.length; i++) {
       tail.next = new LinkNode<T>(array[i]);
@@ -66,7 +66,7 @@ export default class LinkList<T = number> {
     let ptr = this.head?.next;
     while(ptr !== null) {
       if(isEaqual(ptr?.value as T, value) && ptr!==null && prev !==null) {
-        let temp = prev.next;
+        const temp = prev.next;
         prev.next = ptr!.next;
         ptr!.next = null;
         if(ptr?.next === null) {
@@ -96,7 +96,7 @@ export default class LinkList<T = number> {
   public search(value: T): LinkNode<T> | null {
     let ptr = this.head;
     if(ptr === null) return null;
-    let isEaqual: IsEqual<T> = this.isEaqual ? this.isEaqual : defaultIsEaqual;
+    const isEaqual: IsEqual<T> = this.isEaqual ? this.isEaqual : defaultIsEaqual;
     while(ptr) {
       if(isEaqual(ptr.value as T, value)) {
         return ptr;

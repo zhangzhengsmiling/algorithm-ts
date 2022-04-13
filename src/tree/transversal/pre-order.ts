@@ -1,4 +1,4 @@
-import { BinaryTreeNode } from "..";
+import { BinaryTreeNode } from "../index";
 
 export interface BinaryTree<T> {
   value: T;
@@ -6,20 +6,20 @@ export interface BinaryTree<T> {
   right: BinaryTree<T> | null,
 }
 
-export const preOrderTranversalRecursion = <T>(bt: BinaryTree<T>, callback?: (val: T) => void): void => {
+export const preOrderTransversalRecursion = <T>(bt: BinaryTree<T>, callback?: (val: T) => void): void => {
   if(bt === null) return;
   if(typeof callback === 'function') {
     callback(bt.value);
   }
   if(bt.left) {
-    preOrderTranversalRecursion(bt.left, callback);
+    preOrderTransversalRecursion(bt.left, callback);
   }
   if(bt.right) {
-    preOrderTranversalRecursion(bt.right, callback);
+    preOrderTransversalRecursion(bt.right, callback);
   }
-}
+};
 
-export const preOrderTranversal = <T>(bt: BinaryTree<T>, callback: (val: T) => void): void => {
+export const preOrderTransversal = <T>(bt: BinaryTree<T>, callback: (val: T) => void): void => {
   if(bt === null) return;
   const stack = [];
   stack.push(bt);
@@ -33,5 +33,5 @@ export const preOrderTranversal = <T>(bt: BinaryTree<T>, callback: (val: T) => v
       if(node?.left) stack.push(node.left);
     }
   }
-}
+};
 

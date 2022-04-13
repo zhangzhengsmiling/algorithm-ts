@@ -31,7 +31,7 @@ class ChainedHashTable {
       return true;
     }
     return false;
-  }
+  };
   remove(key: any) {
     const hashTable = this.hashTable;
     const hashFunction = this.hashFunction!;
@@ -43,11 +43,11 @@ class ChainedHashTable {
 const a = {
   key: 9,
   value: 100
-}
+};
 const b = {
   key: 2,
   value: 200
-}
+};
 
 const cht = new ChainedHashTable(10, key => key - 1);
 cht.insert(a.key, a);
@@ -56,5 +56,5 @@ cht.insert(b.key, b);
 // console.log(target.value);
 console.log(cht.hashTable);
 cht.remove(a.key);
-console.log(cht.hashTable)
+console.log(cht.hashTable);
 // console.log(cht.search(a.key))

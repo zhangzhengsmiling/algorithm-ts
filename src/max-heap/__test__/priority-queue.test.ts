@@ -33,13 +33,13 @@ describe('priority queue test suites:', () => {
     expect(priorityQueue.heap[0]).toBe(1000);
     const cur = priorityQueue.heap.filter(num => num === temp).length;
     expect(cur).toBe(count - 1);
-  })
+  });
 
   it('insert key:', () => {
     const len = priorityQueue.heap.length;
     priorityQueue.insertKey(10000);
     expect(priorityQueue.heap[0]).toBe(10000);
     expect(priorityQueue.heap.length).toBe(len + 1);
-  })
+  });
 
-})
+});

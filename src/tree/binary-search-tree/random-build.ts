@@ -1,5 +1,4 @@
-import BinarySearchTree, { TreeNode } from ".";
-import in_order from "../tranversal/in-order";
+import BinarySearchTree, { TreeNode } from './index';
 import fs from 'fs';
 
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -19,9 +18,9 @@ const dfs = (tree: TreeNode<string>, callback: any) => {
     if (item.right) stack.unshift(item.right);
     if (item.left) stack.unshift(item.left);
   }
-}
+};
 
 dfs(bst.root, item => delete item.parent);
 
 console.log(JSON.stringify(bst.root));
-fs.writeFileSync('./data.json', JSON.stringify(bst.root))
+fs.writeFileSync('./data.json', JSON.stringify(bst.root));

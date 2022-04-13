@@ -15,7 +15,7 @@ export const quickPowRecursion = (base: number, n: number): number => {
     const _temp = quickPowRecursion(base, (n - 1) / 2);
     return base * _temp * _temp;
   }
-}
+};
 
 export const quickPow = (base: number, n: number) => {
   if(n === 0) return 1;
@@ -30,4 +30,4 @@ export const quickPow = (base: number, n: number) => {
     }
   }
   return res;
-}
+};
