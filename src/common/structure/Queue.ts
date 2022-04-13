@@ -1,4 +1,4 @@
-class Queue<T> {
+export default class Queue<T> {
   private __queue;
   public size: number;
   private constructor(init: T[]) {

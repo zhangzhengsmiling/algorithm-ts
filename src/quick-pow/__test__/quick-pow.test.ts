@@ -24,5 +24,5 @@ describe('fast power:', () => {
     expect(quickPow(base, n)).toBe(result);
   });
 
-})
+});
 

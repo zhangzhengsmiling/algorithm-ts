@@ -157,7 +157,7 @@ export default class BinarySearchTree<DataType> {
   }
 
   // 计算节点的前驱节点
-  _prev(node: TreeNode<DataType>): TreeNode<DataType> {``
+  _prev(node: TreeNode<DataType>): TreeNode<DataType> {``;
     if (node === null) return null;
 
     // node存在左子节点

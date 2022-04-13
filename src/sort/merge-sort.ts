@@ -22,7 +22,7 @@ const merge = (left: number[], right: number[]) => {
     while(ptr_left < left.length) res.push(left[ptr_left++]);
   }
   return res;
-}
+};
 /**
  * merge sort
  * time complexity, O(nlog n)
@@ -35,6 +35,6 @@ const mergeSort = (arr: number[]): number[] => {
   const left = mergeSort(arr.slice(0, mid));
   const right = mergeSort(arr.slice(mid));
   return merge(left, right);
-}
+};
 
 export default mergeSort;

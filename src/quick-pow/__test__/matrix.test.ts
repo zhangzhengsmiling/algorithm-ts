@@ -56,7 +56,7 @@ describe('matrix:', () => {
     ]);
 
     try {
-      m1.multiple(m2)
+      m1.multiple(m2);
     } catch(error) {
       expect(error.message).toBe('not permission...');
     }
@@ -65,7 +65,7 @@ describe('matrix:', () => {
       [1, 1],
       [2, 2],
       [3, 3],
-    ])
+    ]);
     const res = m1.multiple(m3);
     expect(res.rows).toBe(2);
     expect(res.cols).toBe(2);
@@ -87,7 +87,7 @@ describe('matrix:', () => {
     target.set([
       [1, 0],
       [0, 1]
-    ])
+    ]);
     expect(matrix.fastPow(0)).toEqual(
       new Matrix(2, 2).set([
         [1, 0],
@@ -107,6 +107,6 @@ describe('matrix:', () => {
         [656, 640],
         [640, 656]
       ])
-    )
-  })
-})
+    );
+  });
+});

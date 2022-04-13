@@ -53,7 +53,7 @@ export default class Matrix {
   }
 
   fastPow(n: number): Matrix{
-    let e = []
+    const e = [];
     if (n === 0) {
       for(let i = 0; i < this.rows; i++) {
         e[i] = new Array(this.cols).fill(0);

@@ -13,7 +13,7 @@ class PriorityQueue extends MaxHeap {
    */
   maximum = () => {
     return this.heap[0];
-  }
+  };
 
   /**
    * 从优先队列中取出最大元素
@@ -27,7 +27,7 @@ class PriorityQueue extends MaxHeap {
     const res = heap.pop();
     this.maxHeapify(heap, 0);
     return res;
-  }
+  };
 
   /**
    * 增加key值，提高优先级
@@ -57,7 +57,7 @@ class PriorityQueue extends MaxHeap {
     }
     newHeap.shift();
     this.heap = newHeap;
-  }
+  };
 
   /**
    * 向优先队列中插入新值
@@ -66,7 +66,7 @@ class PriorityQueue extends MaxHeap {
   insertKey = (key: number) => {
     const heap = this.heap;
     this.increaseKey(heap.length, key);
-  }
+  };
 
 }
 

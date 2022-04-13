@@ -17,13 +17,13 @@ const buildTree = (nums: (number | null)[]) => {
     }
   });
   
-  let root: TTreeNode<string> | null = list[1];
+  const root: TTreeNode<string> | null = list[1];
   for(let i = 1; i < Math.floor(list.length / 2); i++) {
     list[i].left = list[left(i)];
     list[i].right = list[right(i)];
   }
   return root;
-}
+};
 
 const tree = buildTree([
   6,
@@ -34,4 +34,4 @@ const tree = buildTree([
 
 const target = [];
 in_order(tree, item => target.push(item.key));
-console.log(target.toString())
+console.log(target.toString());

@@ -20,5 +20,5 @@ describe('max heap:', () => {
     const mh = new MaxHeap();
     const temp = mh.heapSort([5, 4, 3, 2, 1]);
     expect(temp).toEqual([1, 2, 3, 4, 5]);
-  })
-})
+  });
+});

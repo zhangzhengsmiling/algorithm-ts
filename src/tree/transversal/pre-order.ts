@@ -17,7 +17,7 @@ export const preOrderTransversalRecursion = <T>(bt: BinaryTree<T>, callback?: (v
   if(bt.right) {
     preOrderTransversalRecursion(bt.right, callback);
   }
-}
+};
 
 export const preOrderTransversal = <T>(bt: BinaryTree<T>, callback: (val: T) => void): void => {
   if(bt === null) return;
@@ -33,5 +33,5 @@ export const preOrderTransversal = <T>(bt: BinaryTree<T>, callback: (val: T) => 
       if(node?.left) stack.push(node.left);
     }
   }
-}
+};
 

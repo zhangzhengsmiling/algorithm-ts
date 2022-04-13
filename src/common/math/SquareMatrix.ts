@@ -12,7 +12,7 @@ export default class SquareMatrix extends Matrix {
 
   protected static check(value: Array<number[]>) {
     if(!super.check(value)) return false;
-    const isSquare = value.length === value[0].length
+    const isSquare = value.length === value[0].length;
     if(!isSquare) throw new Error('无法构成方阵');
     return true;
   }
@@ -29,8 +29,8 @@ export default class SquareMatrix extends Matrix {
         if (rowIndex === colIndex) {
           matrix[rowIndex][colIndex] = 1;
         }
-      })
-    })
+      });
+    });
     return SquareMatrix.of(matrix);
   }
 

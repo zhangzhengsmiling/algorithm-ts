@@ -26,7 +26,7 @@ class PriorityQueue<ADT extends IComparable> extends MaxHeap<ADT> {
       .filter(item => item !== null)
       .findIndex(
         item => item.key === oldKey
-      )
+      );
     if (targetIndex === -1) return false;
     targetIndex++;
     _heap[targetIndex].key = newKey;

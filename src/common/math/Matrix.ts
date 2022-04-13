@@ -21,7 +21,7 @@ export default class Matrix {
   }
 
   public multiple(m: Matrix) {
-    if (this.col !== m.row) throw Error('参数错误')
+    if (this.col !== m.row) throw Error('参数不合法');
     const resultArr = new Array(this.row)
       .fill('')
       .map(() => new Array(m.col).fill(0));
@@ -31,8 +31,8 @@ export default class Matrix {
         for(let i = 0; i < this.col; i++) {
           resultArr[rowIndex][colIndex] += this.value[rowIndex][i] * m.value[i][colIndex];
         } 
-      })
-    })
+      });
+    });
     return Matrix.of(resultArr);
   }
 
@@ -50,7 +50,7 @@ export default class Matrix {
   }
 
   public static of(array: Array<number[]>) {
-    if(!Matrix.check(array)) return new Matrix([[0]]);
+    Matrix.check(array);
     return new Matrix(array);
   }
 

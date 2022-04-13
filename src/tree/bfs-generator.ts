@@ -12,11 +12,11 @@ const bfsGenerator = <T>(bfsKey: keyof T) => {
       if(children instanceof Array) {
         children.forEach((item: any) => {
           queue.push(item);
-        })
+        });
       }
     }
-  }
+  };
   return bfs;
-}
+};
 
 export default bfsGenerator;

@@ -98,9 +98,9 @@ describe('link-list test suite:', () => {
       { id: 1 },
       { id: 2 },
       { id: 3 },
-    ]
+    ];
     expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
-    linkList.add({ id: 8 })
+    linkList.add({ id: 8 });
     const temp = [
       { id: 1 },
       { id: 2 },
@@ -125,9 +125,9 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
       { id: 5 },
-    ]
+    ];
     expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
-    linkList.add({ id: 8 })
+    linkList.add({ id: 8 });
     const temp = [
       { id: 1 },
       { id: 2 },
@@ -156,7 +156,7 @@ describe('link-list test suite:', () => {
       { id: 8 },
     ];
     expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
-  })
+  });
 
   it('link node remove:', () => {
     const array: IUser[] = [
@@ -175,7 +175,7 @@ describe('link-list test suite:', () => {
     try {
       linkList.remove({id: 5});
     } catch(err) {
-      expect(err.message).toBe('node is not found')
+      expect(err.message).toBe('node is not found');
     }
     expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
   });
@@ -192,11 +192,11 @@ describe('link-list test suite:', () => {
       {id: 2},
       {id: 3},
       {id: 4},
-    ]
+    ];
     const list2 = new LinkList<IUser>(users, (a, b) => a.id === b.id);
     const u = list2.search({id: 3});
     expect(u?.value).toEqual({id: 3});
     const uNotFound = list2.search({id: 6});
     expect(uNotFound).toBe(null);
-  })
-})
+  });
+});

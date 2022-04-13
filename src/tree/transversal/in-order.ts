@@ -14,14 +14,14 @@ export class TTreeNode<DataType> {
 
 export default function in_order(root, callback) {
   if(!root) return;
-  let stack = [root];
+  const stack = [root];
   let ptr = root.left;
   while(stack.length > 0 || ptr !== null) {
     while(ptr) {
       stack.push(ptr);
-      ptr = ptr.left
+      ptr = ptr.left;
     }
-    let target = stack.pop();
+    const target = stack.pop();
     // console.log(target.key);
     callback(target);
     ptr = target.right;

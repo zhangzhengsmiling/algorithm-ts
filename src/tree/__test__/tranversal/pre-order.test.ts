@@ -30,7 +30,7 @@ describe('pre order recursion test suite:', () => {
         right: null,
       }
     }
-  }
+  };
 
   it('module import:', () => {
     expect(preOrderTransversalRecursion).toBeInstanceOf(Function);
@@ -41,42 +41,42 @@ describe('pre order recursion test suite:', () => {
     const arr: number[] = [];
     const cb = (value: number) => {
       arr.push(value);
-    }
+    };
   
     const bt = {
       value: 100,
       left: null,
       right: null,
-    }
+    };
     preOrderTransversalRecursion<number>(bt, cb);
-    expect(arr).toEqual([100])
+    expect(arr).toEqual([100]);
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
     preOrderTransversalRecursion(binaryTree, d => res.push(d));
-    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
+    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600]);
   });
 
   it('preorder recursion:', () => {
     const res = new Array<number>();
     preOrderTransversal(binaryTree, d => res.push(d));
-    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600])
+    expect(res).toEqual([100, 200, 300, 700, 400, 500, 600]);
   });
 
   it('preorder test:', () => {
     const arr: number[] = [];
     const cb = (value: number) => {
       arr.push(value);
-    }
+    };
   
     const bt = {
       value: 100,
       left: null,
       right: null,
-    }
+    };
     preOrderTransversal<number>(bt, cb);
-    expect(arr).toEqual([100])
+    expect(arr).toEqual([100]);
   });
 
-})
+});
