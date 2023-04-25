@@ -1,8 +1,8 @@
 export default class Queue<T> {
-  private __queue;
+  private _queue;
   public size: number;
   private constructor(init: T[]) {
-    this.__queue = init;
+    this._queue = init;
     this.size = init.length;
   }
 
@@ -11,17 +11,21 @@ export default class Queue<T> {
   }
 
   public enqueue(t: T) {
-    this.__queue.push(t);
+    this._queue.push(t);
     this.size++;
   }
 
   public dequeue(): T | null {
     if (this.empty()) return null;
-    return this.__queue.shift();
+    return this._queue.shift();
   }
 
   public empty() {
     return this.size === 0;
+  }
+
+  get value() {
+    return this._queue;
   }
 
 }

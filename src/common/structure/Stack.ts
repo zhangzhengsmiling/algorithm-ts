@@ -27,6 +27,10 @@ class Stack<T> {
     return this.size === 0;
   }
 
+  public get value() {
+    return this._value
+  }
+
 }
 
 export default Stack;
