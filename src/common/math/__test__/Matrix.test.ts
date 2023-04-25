@@ -1,4 +1,4 @@
-import Matrix from '../Matrix';
+import Matrix from '@/common/math/Matrix';
 
 describe('math toolkit: Matrix', () => {
   it('module import:', () => {

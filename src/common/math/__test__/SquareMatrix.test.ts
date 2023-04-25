@@ -1,4 +1,4 @@
-import SquareMatrix from '../SquareMatrix';
+import SquareMatrix from '@common/math/SquareMatrix';
 
 describe('math: square matrix', () => {
   it('module import:', () => {
