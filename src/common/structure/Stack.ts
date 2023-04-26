@@ -28,7 +28,7 @@ class Stack<T> {
   }
 
   public get value() {
-    return this._value
+    return this._value;
   }
 
 }

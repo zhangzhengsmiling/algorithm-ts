@@ -19,6 +19,20 @@ describe('math toolkit: Matrix', () => {
     expect(matrix).toBeInstanceOf(Matrix);
   });
 
+  it('error input:', () => {
+    try {
+      Matrix.of([[1, 2, 3], [4, 5]]);
+    } catch(error) {
+      expect(error.message).toBe('输入数据不合法');
+    }
+    try {
+      // @ts-ignore
+      Matrix.of([1, 2, 3, 4]);
+    } catch(error) {
+      expect(error.message).toBe('输入不是二维数组');
+    }
+  });
+
   it('unsuccess instantiation:', () => {
     try {
       Matrix.of(
