@@ -1,4 +1,4 @@
-import LinkList, { LinkNode } from '../link-list';
+import LinkList, { LinkNode } from '../LinkList';
 
 interface IUser {
   id: number;
@@ -15,7 +15,7 @@ describe('link-list test suite:', () => {
 
   it('link list init function test:', () => {
     const array: number[] = [1, 2, 3, 4, 5];
-    const linkList = new LinkList<number>(array);
+    const linkList = LinkList.of(array);
     
     const res = new LinkNode<number>(1);
     let ptr = res;
@@ -31,15 +31,15 @@ describe('link-list test suite:', () => {
 
   it('link node add without comparator:', () => {
     const array: number[] = [1, 2, 3, 4, 5];
-    const linkList = new LinkList<number>(array);
+    const linkList = LinkList.of(array);
     linkList.insert(4, 6);
-    const temp = new LinkList<number>([1, 2, 3 ,4, 6, 5]);
+    const temp = LinkList.of([1, 2, 3 ,4, 6, 5]);
     expect(linkList.head).toEqual(temp.head);
   });
 
   it('link node add, not find prev node:', () => {
     const array: number[] = [1, 2, 3, 4, 5];
-    const linkList = new LinkList<number>(array);
+    const linkList = LinkList.of(array);
     try {
       linkList.insert(6, 67);
     } catch(err) {
@@ -54,7 +54,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.insert({id: 3}, {id: 8});
     const temp = [
       { id: 1 },
@@ -63,7 +63,7 @@ describe('link-list test suite:', () => {
       { id: 8 },
       { id: 4 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node insert to tail:', () => {
@@ -73,7 +73,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.insert({id: 4}, {id: 8});
     const temp = [
       { id: 1 },
@@ -82,7 +82,7 @@ describe('link-list test suite:', () => {
       { id: 4 },
       { id: 8 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node add to tail after insert:', () => {
@@ -92,14 +92,14 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.remove({ id: 4 });
     const res = [
       { id: 1 },
       { id: 2 },
       { id: 3 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(res).head);
     linkList.add({ id: 8 });
     const temp = [
       { id: 1 },
@@ -107,7 +107,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 8 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node add to tail after remove:', () => {
@@ -117,7 +117,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.insert({id: 4}, { id: 5 });
     const res = [
       { id: 1 },
@@ -126,7 +126,7 @@ describe('link-list test suite:', () => {
       { id: 4 },
       { id: 5 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(res).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(res).head);
     linkList.add({ id: 8 });
     const temp = [
       { id: 1 },
@@ -136,7 +136,7 @@ describe('link-list test suite:', () => {
       { id: 5 },
       { id: 8 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node add to tail:', () => {
@@ -146,7 +146,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.add({id: 8});
     const temp = [
       { id: 1 },
@@ -155,7 +155,7 @@ describe('link-list test suite:', () => {
       { id: 4 },
       { id: 8 },
     ];
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node remove:', () => {
@@ -165,7 +165,7 @@ describe('link-list test suite:', () => {
       { id: 3 },
       { id: 4 },
     ];
-    const linkList = new LinkList<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
+    const linkList = LinkList.of<IUser>(array, (a: IUser, b: IUser) => a.id === b.id);
     linkList.remove({id: 3});
     const temp = [
       { id: 1 },
@@ -177,12 +177,12 @@ describe('link-list test suite:', () => {
     } catch(err) {
       expect(err.message).toBe('node is not found');
     }
-    expect(linkList.head).toEqual(new LinkList<IUser>(temp).head);
+    expect(linkList.head).toEqual(LinkList.of<IUser>(temp).head);
   });
 
   it('link node search:', () => {
     const array = [1, 2, 3, 4, 5];
-    const list = new LinkList<number>(array);
+    const list = LinkList.of<number>(array);
     const num = list.search(5);
     expect(num?.value).toBe(5);
     const numNotFound = list.search(8);
@@ -193,7 +193,7 @@ describe('link-list test suite:', () => {
       {id: 3},
       {id: 4},
     ];
-    const list2 = new LinkList<IUser>(users, (a, b) => a.id === b.id);
+    const list2 = LinkList.of<IUser>(users, (a, b) => a.id === b.id);
     const u = list2.search({id: 3});
     expect(u?.value).toEqual({id: 3});
     const uNotFound = list2.search({id: 6});
